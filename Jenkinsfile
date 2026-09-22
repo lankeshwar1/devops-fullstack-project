@@ -22,7 +22,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                bat 'docker built -t devops-fullstack-app:%BUILD_NUMBER% .'
+                bat 'docker build -t devops-fullstack-app:%BUILD_NUMBER% .'
             }
         }
     }
