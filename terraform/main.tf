@@ -3,9 +3,7 @@ resource "kubernetes_namespace" "devops" {
     name = "devops"
   }
 }
-variable "image_tag" {
-  type = string
-}
+
 resource "kubernetes_deployment" "app" {
   metadata {
     name      = "devops-fullstack-app"
