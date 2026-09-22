@@ -3,7 +3,9 @@ resource "kubernetes_namespace" "devops" {
     name = "devops"
   }
 }
-
+variable "image_tag" {
+  type = string
+}
 resource "kubernetes_deployment" "app" {
   metadata {
     name      = "devops-fullstack-app"
@@ -30,7 +32,7 @@ resource "kubernetes_deployment" "app" {
       spec {
         container {
           name              = "devops-fullstack-app"
-          image             = "devops-fullstack-app:3"
+          image             = "devops-fullstack-app:${var.image_tag}"
           image_pull_policy = "IfNotPresent"
 
           port {
