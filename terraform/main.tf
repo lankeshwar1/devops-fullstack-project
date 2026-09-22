@@ -11,7 +11,15 @@ resource "kubernetes_deployment" "app" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
+
+    strategy {
+      type = "RollingUpdate"
+      rolling_update {
+        max_surge = "1"
+        max_unavailable = "1"
+      }
+    }
 
     selector {
       match_labels = {
@@ -53,6 +61,17 @@ resource "kubernetes_deployment" "app" {
             }
             initial_delay_seconds = 5
             period_seconds = 5
+          }
+
+          resources {
+            requests = {
+              cpu = "100m"
+              memory = "128Mi"
+            }
+            limits = {
+              cpu = "250m"
+              memory = "256Mi"
+            }
           }
         }
         
